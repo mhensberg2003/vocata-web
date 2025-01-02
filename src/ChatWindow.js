@@ -75,6 +75,11 @@ function ChatWindow({ messages, setMessages, language, topic }) {
 
   return (
     <div className="Chat-container">
+      {/* Language/Topic Chips */}
+      <div className="language-chips">
+        <span className="language-chip">{language}</span>
+        <span className="language-chip">{topic}</span>
+      </div>
       <div className="Messages" ref={scrollRef}>
         {/* Welcome Message */}
         <div className="Message welcome">
@@ -99,7 +104,10 @@ function ChatWindow({ messages, setMessages, language, topic }) {
 
       {/* Translate Button */}
       <button className="translate-button" onClick={handleTranslateLastMessage}>
-        Translate
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/900/900782.png"
+          alt="Translate"
+        />
       </button>
 
       <div className="Input-container">
