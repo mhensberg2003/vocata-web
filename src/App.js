@@ -27,7 +27,7 @@ function App() {
       {!started ? (
         <div className="Setup">
           {/* Globe Icon */}
-          <img src="/globe-icon.png" alt="Globe Icon" className="globe-icon" />
+          <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
 
           {/* Vocata Title */}
           <h1>vocata</h1>
