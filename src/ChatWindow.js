@@ -37,6 +37,36 @@ function ChatWindow({ messages, setMessages, language, topic }) {
     }
   };
 
+  const handleTranslateLastMessage = async () => {
+    const lastAIMessage = messages
+      .slice()
+      .reverse()
+      .find((msg) => msg.role === "assistant");
+
+    if (!lastAIMessage) {
+      alert("No AI message to translate!");
+      return;
+    }
+
+    setIsThinking(true);
+
+    try {
+      const translatedMessage = await translateTextWithOpenAI(
+        lastAIMessage.content
+      );
+      const translationMessage = {
+        role: "assistant",
+        content: `Translated: ${translatedMessage}`,
+      };
+      setMessages((prevMessages) => [...prevMessages, translationMessage]);
+    } catch (error) {
+      console.error("Translation failed:", error);
+      alert("Translation failed. Please try again.");
+    } finally {
+      setIsThinking(false);
+    }
+  };
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -66,6 +96,11 @@ function ChatWindow({ messages, setMessages, language, topic }) {
           </div>
         )}
       </div>
+
+      {/* Translate Button */}
+      <button className="translate-button" onClick={handleTranslateLastMessage}>
+        Translate
+      </button>
 
       <div className="Input-container">
         <input
