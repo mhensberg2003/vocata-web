@@ -37,36 +37,6 @@ function ChatWindow({ messages, setMessages, language, topic }) {
     }
   };
 
-  const handleTranslateLastMessage = async () => {
-    const lastAIMessage = messages
-      .slice()
-      .reverse()
-      .find((msg) => msg.role === "assistant");
-
-    if (!lastAIMessage) {
-      alert("No AI message to translate!");
-      return;
-    }
-
-    setIsThinking(true);
-
-    try {
-      const translatedMessage = await translateTextWithOpenAI(
-        lastAIMessage.content
-      );
-      const translationMessage = {
-        role: "assistant",
-        content: `Translated: ${translatedMessage}`,
-      };
-      setMessages((prevMessages) => [...prevMessages, translationMessage]);
-    } catch (error) {
-      console.error(error);
-      alert("Translation failed. Please try again.");
-    } finally {
-      setIsThinking(false);
-    }
-  };
-
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -75,23 +45,28 @@ function ChatWindow({ messages, setMessages, language, topic }) {
 
   return (
     <div className="Chat-container">
-      {/* Translate Button */}
-      <button className="translate-button" onClick={handleTranslateLastMessage}>
-        Translate
-      </button>
-
       <div className="Messages" ref={scrollRef}>
-        {messages.map((msg, index) => (
-          <div key={index} className={`Message ${msg.role}`}>
-            {msg.content}
-          </div>
-        ))}
+        {/* Welcome Message */}
+        <div className="Message welcome">
+          This is the beginning of your conversation with your language buddy.
+        </div>
+
+        {/* Chat Messages */}
+        {messages
+          .filter((msg) => msg.role !== "system") // Exclude system messages
+          .map((msg, index) => (
+            <div key={index} className={`Message ${msg.role}`}>
+              {msg.content}
+            </div>
+          ))}
+
         {isThinking && (
           <div className="Message assistant typing-indicator">
             <TypingIndicator />
           </div>
         )}
       </div>
+
       <div className="Input-container">
         <input
           type="text"

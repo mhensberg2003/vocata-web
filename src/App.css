@@ -235,3 +235,15 @@ body {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
+.Message.welcome {
+  background: transparent; /* No background */
+  color: #555; /* Neutral text color */
+  font-size: 1rem; /* Adjust font size */
+  padding: 10px;
+  margin: 20px auto;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 80%;
+  opacity: 0.6; /* Add opacity */
+}
