@@ -310,15 +310,30 @@ body {
   margin-bottom: 20px;
 }
 
-.Setup .dropdown,
-.Setup input,
-.Setup button {
-  margin: 10px 0;
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.Setup select,
+.Setup input {
+  width: 100%; /* Ensures both elements have the same width */
+  padding: 12px; /* Uniform padding for consistent appearance */
+  margin: 10px 0; /* Add consistent spacing */
+  font-size: 1rem; /* Same font size for both */
+  border: 1px solid #ddd; /* Same border */
+  border-radius: 5px; /* Rounded corners for a clean look */
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Setup select:focus,
+.Setup input:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+}
+
+.Setup select {
+  appearance: none; /* Remove default browser dropdown styling */
+  background: white url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23cccccc' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
+    no-repeat right 10px center; /* Custom dropdown arrow */
+  background-size: 10px; /* Size of the arrow icon */
 }
 
 .Setup button {
