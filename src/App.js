@@ -31,7 +31,7 @@ function App() {
 
           {/* Vocata Title */}
           <h1>vocata</h1>
-          <p>Get started by selecting a language and topic!</p>
+          <p>Get started chatting by selecting a language and topic!</p>
 
           {/* Language Dropdown */}
           <select
