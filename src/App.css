@@ -216,7 +216,7 @@ body {
   height: auto;
   margin: 0 auto;
   display: block; /* Center the icon */
-  margin-bottom: 10px; /* Add spacing below the icon */
+  margin-bottom: 1px; /* Add spacing below the icon */
 }
 
 /* Dropdown Styling */
@@ -292,7 +292,7 @@ body {
   justify-content: center;
   align-items: center;
   background: #ffffff; /* Optional: Add a card-like background */
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
   max-width: 400px;
