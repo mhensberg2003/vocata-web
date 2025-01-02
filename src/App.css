@@ -276,3 +276,69 @@ body {
   border-radius: 10px;
   box-shadow: none; /* Optional: Remove any shadow for a cleaner look */
 }
+
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9; /* Optional: Change the background color */
+}
+
+.Setup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff; /* Optional: Add a card-like background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  max-width: 400px;
+  width: 90%; /* Responsive for smaller screens */
+}
+
+.Setup h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.Setup p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.Setup .dropdown,
+.Setup input,
+.Setup button {
+  margin: 10px 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.Setup button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.Setup button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.Setup button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.globe-icon {
+  width: 60px;
+  margin-bottom: 0px;
+}
