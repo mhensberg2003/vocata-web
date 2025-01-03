@@ -331,7 +331,8 @@ body {
 
 .Setup select {
   appearance: none; /* Remove default browser dropdown styling */
-  background: white url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23cccccc' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
+  background: white
+    url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23cccccc' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
     no-repeat right 10px center; /* Custom dropdown arrow */
   background-size: 10px; /* Size of the arrow icon */
 }
@@ -356,4 +357,24 @@ body {
 .globe-icon {
   width: 60px;
   margin-bottom: 0px;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Send it to the background */
+}
+
+.App {
+  position: relative;
+  z-index: 1; /* Ensure content appears above the background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #ffffff; /* Adjust text color for visibility */
 }
