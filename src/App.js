@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 import * as reactSpring from "@react-spring/three";
+import { CSSTransition } from "react-transition-group";
 import ChatWindow from "./ChatWindow";
 import "./App.css";
 
@@ -36,8 +37,13 @@ function App() {
         </ShaderGradientCanvas>
       </div>
 
-      {/* Main Content */}
-      {!started ? (
+      {/* Main Content with Transition */}
+      <CSSTransition
+        in={!started}
+        timeout={300}
+        classNames="page-transition"
+        unmountOnExit
+      >
         <div className="Setup">
           {/* Globe Icon */}
           <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
@@ -76,14 +82,21 @@ function App() {
             Start Chat
           </button>
         </div>
-      ) : (
+      </CSSTransition>
+
+      <CSSTransition
+        in={started}
+        timeout={300}
+        classNames="page-transition"
+        unmountOnExit
+      >
         <ChatWindow
           messages={messages}
           setMessages={setMessages}
           language={language}
           topic={topic}
         />
-      )}
+      </CSSTransition>
     </div>
   );
 }
