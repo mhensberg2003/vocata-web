@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { sendMessageToOpenAI } from "./OpenAIService";
+import LoadingAnimation from './components/LoadingAnimation';
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");
@@ -57,11 +58,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
           </div>
         ))}
 
-        {isThinking && (
-          <div className="Message assistant typing-indicator">
-            <TypingIndicator />
-          </div>
-        )}
+        {isThinking && <LoadingAnimation message="AI is thinking..." />}
       </div>
 
       <div className="Input-container">

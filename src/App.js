@@ -5,6 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import ChatWindow from "./ChatWindow";
 import { sendMessageToOpenAI } from "./OpenAIService";
 import "./App.css";
+import LoadingAnimation from './components/LoadingAnimation';
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
@@ -133,6 +134,7 @@ const handleStartChat = async () => {
           topic={topic}
           isThinking={isThinking}
           setIsThinking={setIsThinking}
+          LoadingComponent={LoadingAnimation}
         />
       </CSSTransition>
     </div>
