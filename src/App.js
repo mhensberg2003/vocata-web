@@ -27,7 +27,7 @@ const handleStartChat = async () => {
 
     const initialPrompt = {
       role: "user",
-      content: `Please generate an engaging first question + welcome messageto start a conversation about ${topic}. Only the message, no other text.`,
+      content: `Please generate an engaging first question + welcome messageto start a conversation about ${topic}. Only the message, no other text, no quotation marks.`,
     };
 
     setMessages([systemMessage]); // Add system message first
