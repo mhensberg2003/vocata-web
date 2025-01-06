@@ -11,6 +11,7 @@ function App() {
   const [topic, setTopic] = useState(""); // User-selected topic
   const [started, setStarted] = useState(false); // Whether the chat has started
   const [messages, setMessages] = useState([]); // Chat messages
+  const [isThinking, setIsThinking] = useState(false); // Whether the AI is thinking
 
   // Handle starting the chat
   
@@ -32,6 +33,9 @@ const handleStartChat = async () => {
     setMessages([systemMessage]); // Add system message first
     setStarted(true); // Transition to the chat immediately
 
+    // Show typing animation before requesting
+    setIsThinking(true);
+
     try {
       // Generate the initial question using OpenAI
       const assistantResponse = await sendMessageToOpenAI([systemMessage, initialPrompt]);
@@ -49,6 +53,9 @@ const handleStartChat = async () => {
         content: "Oops! Something went wrong. Please try starting the chat again.",
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    } finally {
+      // Turn off typing indicator
+      setIsThinking(false);
     }
   }
 };
@@ -124,6 +131,8 @@ const handleStartChat = async () => {
           setMessages={setMessages}
           language={language}
           topic={topic}
+          isThinking={isThinking}
+          setIsThinking={setIsThinking}
         />
       </CSSTransition>
     </div>
