@@ -77,6 +77,10 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
           Send
         </button>
       </div>
+
+      <button className="translate-button">
+        <img src="globe-icon.png" alt="Translate" />
+      </button>
     </div>
   );
 }
