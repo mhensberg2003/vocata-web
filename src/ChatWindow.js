@@ -69,6 +69,11 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && newMessage.trim()) {
+              handleSendMessage();
+            }
+          }}
           placeholder="Type your message..."
         />
         <button onClick={handleSendMessage} disabled={!newMessage.trim()}>
