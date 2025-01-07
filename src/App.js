@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 import * as reactSpring from "@react-spring/three";
 import { CSSTransition } from "react-transition-group";
@@ -6,6 +7,7 @@ import ChatWindow from "./ChatWindow";
 import { sendMessageToOpenAI } from "./OpenAIService";
 import "./App.css";
 import LoadingAnimation from './components/LoadingAnimation';
+import Register from './components/Register';
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
