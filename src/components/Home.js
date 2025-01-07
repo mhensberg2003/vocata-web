@@ -17,11 +17,13 @@ function Home() {
   }, [auth, navigate]);
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Welcome</h2>
-      <p>Please login or register to continue.</p>
-      <button onClick={() => navigate("/login")}>Login</button>
-      <button onClick={() => navigate("/register")}>Register</button>
+    <div className="Home-container">
+      <div className="Setup">
+        <h2>Welcome</h2>
+        <p>Please login or register to continue.</p>
+        <button onClick={() => navigate("/login")}>Login</button>
+        <button onClick={() => navigate("/register")}>Register</button>
+      </div>
     </div>
   );
 }
