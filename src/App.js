@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 import * as reactSpring from "@react-spring/three";
 import { CSSTransition } from "react-transition-group";
@@ -65,81 +65,88 @@ const handleStartChat = async () => {
 
 
   return (
-    <div className="App">
-      <div className="background">
-        <ShaderGradientCanvas>
-          <ShaderGradient
-            zoomOut={false}
-            control="query"
-            urlString="https://www.shadergradient.co/customize?animate=on&axesHelper=off&bgColor1=%23000000&bgColor2=%23000000&brightness=1&cAzimuthAngle=180&cDistance=2.8&cPolarAngle=80&cameraZoom=9.1&color1=%23006D77&color2=%2383C5BE&color3=%23252525&destination=onCanvas&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&range=enabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=50&rotationY=0&rotationZ=-60&shader=defaults&type=waterPlane&uAmplitude=0&uDensity=1.5&uFrequency=0&uSpeed=0.2&uStrength=1.5&uTime=8&wireframe=false"
-          />
-        </ShaderGradientCanvas>
-      </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className="App">
+            <div className="background">
+              <ShaderGradientCanvas>
+                <ShaderGradient
+                  zoomOut={false}
+                  control="query"
+                  urlString="https://www.shadergradient.co/customize?animate=on&axesHelper=off&bgColor1=%23000000&bgColor2=%23000000&brightness=1&cAzimuthAngle=180&cDistance=2.8&cPolarAngle=80&cameraZoom=9.1&color1=%23006D77&color2=%2383C5BE&color3=%23252525&destination=onCanvas&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&range=enabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=50&rotationY=0&rotationZ=-60&shader=defaults&type=waterPlane&uAmplitude=0&uDensity=1.5&uFrequency=0&uSpeed=0.2&uStrength=1.5&uTime=8&wireframe=false"
+                />
+              </ShaderGradientCanvas>
+            </div>
 
-      {/* Main Content with Transition */}
-      <CSSTransition
-        in={!started}
-        timeout={300}
-        classNames="page-transition"
-        unmountOnExit
-      >
-        <div className="Setup">
-          {/* Globe Icon */}
-          <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
+            {/* Main Content with Transition */}
+            <CSSTransition
+              in={!started}
+              timeout={300}
+              classNames="page-transition"
+              unmountOnExit
+            >
+              <div className="Setup">
+                {/* Globe Icon */}
+                <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
 
-          {/* Vocata Title */}
-          <h1>vocata</h1>
-          <p>Get started chatting by selecting a language and topic!</p>
+                {/* Vocata Title */}
+                <h1>vocata</h1>
+                <p>Get started chatting by selecting a language and topic!</p>
 
-          {/* Language Dropdown */}
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            className="dropdown"
-          >
-            <option value="" disabled>
-              Select a language
-            </option>
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="German">German</option>
-            <option value="French">French</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
-          </select>
+                {/* Language Dropdown */}
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="dropdown"
+                >
+                  <option value="" disabled>
+                    Select a language
+                  </option>
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="German">German</option>
+                  <option value="French">French</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                </select>
 
-          {/* Topic Input Field */}
-          <input
-            type="text"
-            placeholder="Enter a topic (e.g., Travel)"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-          />
+                {/* Topic Input Field */}
+                <input
+                  type="text"
+                  placeholder="Enter a topic (e.g., Travel)"
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                />
 
-          {/* Start Chat Button */}
-          <button onClick={handleStartChat} disabled={!language || !topic}>
-            Start Chat
-          </button>
-        </div>
-      </CSSTransition>
+                {/* Start Chat Button */}
+                <button onClick={handleStartChat} disabled={!language || !topic}>
+                  Start Chat
+                </button>
+              </div>
+            </CSSTransition>
 
-      <CSSTransition
-        in={started}
-        timeout={300}
-        classNames="page-transition"
-        unmountOnExit
-      >
-        <ChatWindow
-          messages={messages}
-          setMessages={setMessages}
-          language={language}
-          topic={topic}
-          isThinking={isThinking}
-          setIsThinking={setIsThinking}
-          LoadingComponent={LoadingAnimation}
-        />
-      </CSSTransition>
-    </div>
+            <CSSTransition
+              in={started}
+              timeout={300}
+              classNames="page-transition"
+              unmountOnExit
+            >
+              <ChatWindow
+                messages={messages}
+                setMessages={setMessages}
+                language={language}
+                topic={topic}
+                isThinking={isThinking}
+                setIsThinking={setIsThinking}
+                LoadingComponent={LoadingAnimation}
+              />
+            </CSSTransition>
+          </div>
+        } />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 
