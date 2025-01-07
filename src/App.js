@@ -8,6 +8,7 @@ import { sendMessageToOpenAI } from "./OpenAIService";
 import "./App.css";
 import LoadingAnimation from './components/LoadingAnimation';
 import Register from './components/Register';
+import Login from './components/Login';
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
@@ -145,6 +146,7 @@ const handleStartChat = async () => {
           </div>
         } />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
