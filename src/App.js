@@ -9,6 +9,7 @@ import "./App.css";
 import LoadingAnimation from './components/LoadingAnimation';
 import Register from './components/Register';
 import Login from './components/Login';
+import Home from './components/Home';
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
@@ -68,7 +69,7 @@ const handleStartChat = async () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
+        <Route path="/vocata" element={
           <div className="App">
             <div className="background">
               <ShaderGradientCanvas>
@@ -145,6 +146,7 @@ const handleStartChat = async () => {
             </CSSTransition>
           </div>
         } />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
