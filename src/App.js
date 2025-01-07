@@ -90,6 +90,7 @@ const handleStartChat = async () => {
               unmountOnExit
             >
               <div className="Setup">
+                <a href="/logout" className="logout-link">Log out</a>
                 {/* Globe Icon */}
                 <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
 
