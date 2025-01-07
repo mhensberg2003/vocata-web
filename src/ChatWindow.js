@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { sendMessageToOpenAI } from "./OpenAIService";
 import LoadingAnimation from './components/LoadingAnimation';
+import { translateTextWithOpenAI } from "./OpenAIService";
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");
@@ -29,6 +30,33 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       ]);
     } finally {
       // Turn off typing
+      setIsThinking(false);
+    }
+  };
+
+  const handleTranslateLastMessage = async () => {
+    const lastAIMessage = messages
+      .slice()
+      .reverse()
+      .find((msg) => msg.role === "assistant");
+    if (!lastAIMessage) {
+      alert("No AI message to translate!");
+      return;
+    }
+    setIsThinking(true);
+    try {
+      const translatedMessage = await translateTextWithOpenAI(
+        lastAIMessage.content
+      );
+      const translationMessage = {
+        role: "assistant",
+        content: `Translated: ${translatedMessage}`,
+      };
+      setMessages((prevMessages) => [...prevMessages, translationMessage]);
+    } catch (error) {
+      console.error("Translation failed:", error);
+      alert("Translation failed. Please try again.");
+    } finally {
       setIsThinking(false);
     }
   };
@@ -79,7 +107,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       </div>
 
       <button className="translate-button">
-        <img src="globe-icon.png" alt="Translate" />
+        <img src="globe-icon.png" alt="Translate" onClick={handleTranslateLastMessage} />
       </button>
     </div>
   );
