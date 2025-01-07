@@ -10,6 +10,7 @@ import LoadingAnimation from './components/LoadingAnimation';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import Logout from './components/Logout';
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
@@ -149,6 +150,7 @@ const handleStartChat = async () => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </Router>
   );
