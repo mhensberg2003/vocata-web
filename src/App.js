@@ -92,7 +92,7 @@ const handleStartChat = async () => {
               <div className="Setup">
                 <a href="/logout" className="logout-link">Log out</a>
                 {/* Globe Icon */}
-                <img src="/60fps-slower.gif" alt="Globe Icon" className="globe-icon" />
+                <img src="/logo.png" alt="Globe Icon" className="globe-icon" />
 
                 {/* Vocata Title */}
                 <h1>vocata</h1>
