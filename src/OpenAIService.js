@@ -2,24 +2,30 @@ import axios from "axios";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
+const getApiKey = async () => {
+  const response = await fetch('/api/getApiKey');
+  const data = await response.json();
+  return data.apiKey;
+};
+
 export const sendMessageToOpenAI = async (messages) => {
   try {
+    const apiKey = await getApiKey();
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4o-mini", // Replace with your desired model (e.g., "gpt-3.5-turbo" or "gpt-4")
+        model: "gpt-4o-mini",
         messages: messages,
-        max_tokens: 90, // Limit the response length
-        temperature: 0.7, // Adjust for randomness
+        max_tokens: 90,
+        temperature: 0.7,
       },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
         },
       }
     );
-
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error("OpenAI API Error:", error);
