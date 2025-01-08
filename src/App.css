@@ -167,6 +167,8 @@ body {
 .Setup h1 {
   font-size: 2rem;
   color: #000;
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 .Setup p {
