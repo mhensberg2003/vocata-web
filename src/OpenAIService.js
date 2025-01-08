@@ -38,6 +38,7 @@ export const translateTextWithOpenAI = async (
   targetLanguage = "English"
 ) => {
   try {
+    const apiKey = await getApiKey();
     const response = await axios.post(
       OPENAI_API_URL,
       {
@@ -54,7 +55,41 @@ export const translateTextWithOpenAI = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    return response.data.choices[0].message.content;
+  } catch (error) {
+    console.error("Translation Error:", error);
+    throw new Error("Failed to translate text.");
+  }
+};
+
+export const eTextWithOpenAI = async (
+  text,
+  targetLanguage = "English"
+) => {
+  try {
+    const apiKey = await getApiKey();
+    const response = await axios.post(
+      OPENAI_API_URL,
+      {
+        model: "gpt-4o-mini", // or your preferred model
+        messages: [
+          {
+            role: "system",
+            content: `Translate the following text to ${targetLanguage}: "${text}"`,
+          },
+        ],
+        max_tokens: 100, // Adjust for translation length
+        temperature: 0.3, // Lower randomness for translation
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
         },
       }
     );
