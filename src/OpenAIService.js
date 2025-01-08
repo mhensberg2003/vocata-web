@@ -7,9 +7,9 @@ export const sendMessageToOpenAI = async (messages) => {
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4", // Replace with your desired model (e.g., "gpt-3.5-turbo" or "gpt-4")
+        model: "gpt-4o-mini", // Replace with your desired model (e.g., "gpt-3.5-turbo" or "gpt-4")
         messages: messages,
-        max_tokens: 150, // Limit the response length
+        max_tokens: 90, // Limit the response length
         temperature: 0.7, // Adjust for randomness
       },
       {
@@ -35,7 +35,7 @@ export const translateTextWithOpenAI = async (
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4", // or your preferred model
+        model: "gpt-4o-mini", // or your preferred model
         messages: [
           {
             role: "system",
