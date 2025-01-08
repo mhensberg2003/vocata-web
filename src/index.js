@@ -7,28 +7,46 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCkei9Q0WxUXxr_vYlUE9n3tFAuY1CgTHY",
-  authDomain: "vocataauth.firebaseapp.com",
-  projectId: "vocataauth",
-  storageBucket: "vocataauth.firebasestorage.app",
-  messagingSenderId: "49687838551",
-  appId: "1:49687838551:web:3d74879e67f11b129fc812",
-  measurementId: "G-J9DQL47526"
+const fetchFirebaseConfig = async () => {
+  try {
+    const response = await fetch('/api/getFirebaseConfig');
+    if (!response.ok) {
+      throw new Error('Failed to fetch Firebase config');
+    }
+    const config = await response.json();
+    console.log('Firebase Config:', config);
+    return config;
+  } catch (error) {
+    console.error('Error fetching Firebase config:', error);
+    throw error;
+  }
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const analytics = getAnalytics(app);
+const initializeFirebase = async () => {
+  try {
+    const firebaseConfig = await fetchFirebaseConfig();
+    const app = initializeApp(firebaseConfig);
+    return app;
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+    return null;
+  }
+};
+
+initializeFirebase().then((app) => {
+  if (app) {
+    const auth = getAuth(app);
+    const analytics = getAnalytics(app);
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+
+    reportWebVitals();
+  } else {
+    console.error('Firebase app initialization failed.');
+  }
+});
