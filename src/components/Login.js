@@ -68,20 +68,23 @@ const Login = () => {
         <button 
           onClick={handleGoogleSignIn}
           style={{ 
-            width: '100%',
-            padding: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-            background: 'white',
-            border: '1px solid #ddd',
-            borderRadius: '8px',
-            cursor: 'pointer'
+            width: 'auto',
+            padding: '0',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'block',
+            margin: '0 auto'
           }}
         >
-          <img src="/web_neutral_sq_SI@4x.png" alt="Google" style={{ width: '20px', height: '20px' }} />
-          <span>Sign in with Google</span>
+          <img 
+            src="/web_neutral_sq_SI@4x.png" 
+            alt="Google Sign In" 
+            style={{ 
+              width: '240px',
+              height: 'auto'
+            }} 
+          />
         </button>
 
         {error && <p>{error}</p>}
