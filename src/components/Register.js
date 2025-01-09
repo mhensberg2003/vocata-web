@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import { signInWithGoogle } from '../firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const auth = getAuth();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registration successful!');
+      navigate('/vocata');
     } catch (err) {
       setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/vocata');
+    } catch (error) {
+      setError('Failed to sign in with Google.');
+      console.error(error);
     }
   };
 
@@ -48,7 +61,35 @@ const Register = () => {
           />
           <button type="submit">Register</button>
         </form>
+
+        <div style={{ margin: '20px 0', textAlign: 'center' }}>or</div>
+        
+        <button 
+          onClick={handleGoogleSignIn}
+          style={{ 
+            width: 'auto',
+            padding: '0',
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'block',
+            margin: '0 auto'
+          }}
+        >
+          <img 
+            src="/web_neutral_sq_SU@4x.png" 
+            alt="Google Sign In" 
+            style={{ 
+              width: '240px',
+              height: 'auto'
+            }} 
+          />
+        </button>
+
         {error && <p>{error}</p>}
+        <p style={{ marginTop: '20px', textAlign: 'center' }}>
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </div>
     </div>
   );
