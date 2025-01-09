@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import{ ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import { signInWithGoogle } from '../firebase/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/vocata');
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      setError('Failed to log in. Please check your credentials.');
+      console.error(error);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/vocata');
+    } catch (error) {
+      setError('Failed to sign in with Google.');
+      console.error(error);
     }
   };
 
@@ -33,7 +45,7 @@ const Login = () => {
       </div>
       <div className="Setup">
         <h2>Login</h2>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Email"
@@ -48,9 +60,34 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Log In</button>
+          <button type="submit">Login</button>
         </form>
+        
+        <div style={{ margin: '20px 0', textAlign: 'center' }}>or</div>
+        
+        <button 
+          onClick={handleGoogleSignIn}
+          style={{ 
+            width: '100%',
+            padding: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+            background: 'white',
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            cursor: 'pointer'
+          }}
+        >
+          <img src="/web_neutral_sq_SI@4x.png" alt="Google" style={{ width: '20px', height: '20px' }} />
+          <span>Sign in with Google</span>
+        </button>
+
         {error && <p>{error}</p>}
+        <p style={{ marginTop: '20px', textAlign: 'center' }}>
+          Don't have an account? <a href="/register">Register</a>
+        </p>
       </div>
     </div>
   );
