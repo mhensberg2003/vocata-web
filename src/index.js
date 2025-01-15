@@ -13,9 +13,7 @@ const fetchFirebaseConfig = async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch Firebase config');
     }
-    const config = await response.json();
-    console.log('Firebase Config:', config);
-    return config;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching Firebase config:', error);
     throw error;
