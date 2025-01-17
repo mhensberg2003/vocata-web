@@ -35,14 +35,18 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   };
 
   const handleTranslateLastMessage = async () => {
-    const lastAIMessage = messages
+    const lastAIMessageIndex = messages
       .slice()
       .reverse()
-      .find((msg) => msg.role === "assistant");
-    if (!lastAIMessage) {
-      alert("No AI message to translate!");
+      .findIndex((msg) => msg.role === "assistant" && !msg.translated);
+
+    if (lastAIMessageIndex === -1) {
+      alert("No AI message to translate or already translated!");
       return;
     }
+
+    const lastAIMessage = messages[messages.length - 1 - lastAIMessageIndex];
+
     setIsThinking(true);
     try {
       const translatedMessage = await translateTextWithOpenAI(
@@ -51,8 +55,16 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       const translationMessage = {
         role: "assistant",
         content: `Translated: ${translatedMessage}`,
+        translated: true,
       };
-      setMessages((prevMessages) => [...prevMessages, translationMessage]);
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages];
+        updatedMessages[messages.length - 1 - lastAIMessageIndex] = {
+          ...lastAIMessage,
+          translated: true,
+        };
+        return [...updatedMessages, translationMessage];
+      });
     } catch (error) {
       console.error("Translation failed:", error);
       alert("Translation failed. Please try again.");
@@ -106,8 +118,12 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
         </button>
       </div>
 
-      <button className="translate-button">
-        <img src="globe-icon.png" alt="Translate" onClick={handleTranslateLastMessage} />
+      <button
+        className="translate-button"
+        onClick={handleTranslateLastMessage}
+        disabled={isThinking || !messages.some(msg => msg.role === "assistant" && !msg.translated)}
+      >
+        <img src="globe-icon.png" alt="Translate" />
       </button>
     </div>
   );
