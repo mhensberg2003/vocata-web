@@ -7,17 +7,19 @@ const SummaryPage = () => {
   const { messages, language } = location.state || { messages: [], language: 'English' };
   const [summary, setSummary] = useState('');
   const [grammarScore, setGrammarScore] = useState(null);
+  const [vocabularyScore, setVocabularyScore] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let isMounted = true; // Track if the component is still mounted
+    let isMounted = true;
 
     const fetchSummaryAndScore = async () => {
       try {
-        const { summary, score } = await summarizeChatWithOpenAI(messages, language);
-        if (isMounted) { // Only update state if component is still mounted
+        const { summary, grammarScore, vocabularyScore } = await summarizeChatWithOpenAI(messages, language);
+        if (isMounted) {
           setSummary(summary);
-          setGrammarScore(score);
+          setGrammarScore(grammarScore);
+          setVocabularyScore(vocabularyScore);
         }
       } catch (error) {
         console.error("Error fetching summary and score:", error);
@@ -31,7 +33,7 @@ const SummaryPage = () => {
     fetchSummaryAndScore();
 
     return () => {
-      isMounted = false; // Cleanup function to prevent state updates if unmounted
+      isMounted = false;
     };
   }, [messages, language]);
 
@@ -51,6 +53,7 @@ const SummaryPage = () => {
         <>
           <p>{summary}</p>
           <h2>Grammar Score: {grammarScore !== null ? grammarScore : 'Unavailable'}</h2>
+          <h2>Vocabulary Score: {vocabularyScore !== null ? vocabularyScore : 'Unavailable'}</h2>
         </>
       )}
     </div>

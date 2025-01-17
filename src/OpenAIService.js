@@ -117,6 +117,7 @@ Summary: [Brief overview of the conversation topics and flow]
 
 Language Skills Assessment:
 - Grammar Score: [0-100]
+- Vocabulary Score: [0-100]
 - Vocabulary Usage: [Brief assessment of vocabulary level and variety]
 - Common Mistakes: [List 2-3 specific grammar or vocabulary mistakes if any]
 
@@ -144,13 +145,16 @@ Practice Suggestions:
 
     const content = response.data.choices[0].message.content;
     
-    // Extract grammar score using regex
-    const scoreMatch = content.match(/Grammar Score: (\d+)/);
-    const score = scoreMatch ? parseInt(scoreMatch[1], 10) : null;
+    // Extract scores using regex
+    const grammarScoreMatch = content.match(/Grammar Score: (\d+)/);
+    const vocabularyScoreMatch = content.match(/Vocabulary Score: (\d+)/);
+    const grammarScore = grammarScoreMatch ? parseInt(grammarScoreMatch[1], 10) : null;
+    const vocabularyScore = vocabularyScoreMatch ? parseInt(vocabularyScoreMatch[1], 10) : null;
 
     return { 
       summary: content,
-      score: score // Now properly extracted from the content
+      grammarScore: grammarScore,
+      vocabularyScore: vocabularyScore
     };
   } catch (error) {
     console.error("OpenAI API Error:", error);
