@@ -111,12 +111,28 @@ export const summarizeChatWithOpenAI = async (messages, language) => {
         messages: [
           {
             role: "system",
-            content: `Summarize the following conversation in English and provide a grammar score from 0 to 100. Format the response as: "Summary: [summary text] Score: [number]".`,
+            content: `Analyze the following conversation and provide detailed feedback in this format:
+
+Summary: [Brief overview of the conversation topics and flow]
+
+Language Skills Assessment:
+- Grammar Score: [0-100]
+- Vocabulary Usage: [Brief assessment of vocabulary level and variety]
+- Common Mistakes: [List 2-3 specific grammar or vocabulary mistakes if any]
+
+Areas for Improvement:
+- [2-3 specific suggestions for improvement]
+
+Strengths:
+- [2-3 aspects where the learner performed well]
+
+Practice Suggestions:
+- [2-3 specific exercises or focus areas for future practice]`,
           },
           ...messages.map(msg => ({ role: msg.role, content: msg.content })),
         ],
-        max_tokens: 300,
-        temperature: 0.5,
+        max_tokens: 500,
+        temperature: 0.7,
       },
       {
         headers: {
@@ -126,16 +142,18 @@ export const summarizeChatWithOpenAI = async (messages, language) => {
       }
     );
 
-    const summaryContent = response.data.choices[0].message.content;
-    const summaryMatch = summaryContent.match(/Summary:\s*(.*?)\s*Score:/);
-    const scoreMatch = summaryContent.match(/Score:\s*(\d+)/);
-
-    const summary = summaryMatch ? summaryMatch[1].trim() : "Summary not available.";
+    const content = response.data.choices[0].message.content;
+    
+    // Extract grammar score using regex
+    const scoreMatch = content.match(/Grammar Score: (\d+)/);
     const score = scoreMatch ? parseInt(scoreMatch[1], 10) : null;
 
-    return { summary, score };
+    return { 
+      summary: content,
+      score: score // Now properly extracted from the content
+    };
   } catch (error) {
     console.error("OpenAI API Error:", error);
-    throw new Error("Failed to summarize chat and score grammar.");
+    throw new Error("Failed to analyze chat performance.");
   }
 };
