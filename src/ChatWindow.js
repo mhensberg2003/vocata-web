@@ -86,8 +86,10 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
         <span className="language-chip">{topic}</span>
       </div>
 
+      <button className="summarize-button" onClick={() => alert('Summarize')}>
+      </button>
+
       <div className="Messages" ref={scrollRef}>
-        {/* Example: A small welcome label, if you want  */}
         <div className="Message welcome">
           This is the beginning of your conversation with your language buddy.
         </div>

@@ -201,6 +201,10 @@ body {
   cursor: not-allowed;
 }
 
+.Setup button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
 .translate-button {
   position: absolute;
   top: 10px;
@@ -600,4 +604,31 @@ body {
 
 .translate-button:hover .translation-icon {
   content: url('../public/translation.gif');
+}
+
+.summarize-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summarize-button:hover {
+  background-color: #f0f0f0;
+}
+
+.summarize-button::before {
+  content: "\1F4DD"; /* Unicode for a memo emoji */
+  font-size: 20px;
+  color: #333;
 }
