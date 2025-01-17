@@ -1,0 +1,27 @@
+.summary-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.summary-box {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+}
+
+.summary-box h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.summary-box p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+} 
