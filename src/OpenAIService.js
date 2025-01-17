@@ -100,3 +100,42 @@ export const eTextWithOpenAI = async (
     throw new Error("Failed to translate text.");
   }
 };
+
+export const summarizeChatWithOpenAI = async (messages, language) => {
+  try {
+    const apiKey = await getApiKey();
+    const response = await axios.post(
+      OPENAI_API_URL,
+      {
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `Summarize the following conversation in English and provide a grammar score from 0 to 100. Format the response as: "Summary: [summary text] Score: [number]".`,
+          },
+          ...messages.map(msg => ({ role: msg.role, content: msg.content })),
+        ],
+        max_tokens: 300,
+        temperature: 0.5,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    const summaryContent = response.data.choices[0].message.content;
+    const summaryMatch = summaryContent.match(/Summary:\s*(.*?)\s*Score:/);
+    const scoreMatch = summaryContent.match(/Score:\s*(\d+)/);
+
+    const summary = summaryMatch ? summaryMatch[1].trim() : "Summary not available.";
+    const score = scoreMatch ? parseInt(scoreMatch[1], 10) : null;
+
+    return { summary, score };
+  } catch (error) {
+    console.error("OpenAI API Error:", error);
+    throw new Error("Failed to summarize chat and score grammar.");
+  }
+};

@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { summarizeChatWithOpenAI } from '../OpenAIService';
 
 const SummaryPage = () => {
   const location = useLocation();
-  const { messages } = location.state || { messages: [] };
+  const { messages, language } = location.state || { messages: [], language: 'English' };
+  const [summary, setSummary] = useState('');
+  const [grammarScore, setGrammarScore] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const summarizeChat = (messages) => {
-    // Simple summary logic for demonstration
-    return messages.map(msg => msg.content).join(' ');
-  };
+  useEffect(() => {
+    let isMounted = true; // Track if the component is still mounted
+
+    const fetchSummaryAndScore = async () => {
+      try {
+        const { summary, score } = await summarizeChatWithOpenAI(messages, language);
+        if (isMounted) { // Only update state if component is still mounted
+          setSummary(summary);
+          setGrammarScore(score);
+        }
+      } catch (error) {
+        console.error("Error fetching summary and score:", error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchSummaryAndScore();
+
+    return () => {
+      isMounted = false; // Cleanup function to prevent state updates if unmounted
+    };
+  }, [messages, language]);
 
   return (
     <div className="summary-container">
       <h1>Chat Summary</h1>
-      <p>{summarizeChat(messages)}</p>
+      {loading ? (
+        <p>Loading summary...</p>
+      ) : (
+        <>
+          <p>{summary}</p>
+          <h2>Grammar Score: {grammarScore !== null ? grammarScore : 'Unavailable'}</h2>
+        </>
+      )}
     </div>
   );
 };
