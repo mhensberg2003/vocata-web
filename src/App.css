@@ -207,16 +207,21 @@ body {
   right: 10px;
   background: #ffffff;
   border: none;
-  padding: 10px;
+  width: 48px;
+  height: 48px;
+  padding: 8px;
   border-radius: 50%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .translate-button img {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
 }
 
 .translate-button:hover {
@@ -588,9 +593,9 @@ body {
 
 /* Assuming you have a CSS file linked to your component */
 .translate-button .translation-icon {
-  width: 24px; /* Adjust size as needed */
-  height: 24px;
-  transition: all 0.3s ease; /* Smooth transition */
+  width: 32px;
+  height: 32px;
+  transition: all 0.3s ease;
 }
 
 .translate-button:hover .translation-icon {
