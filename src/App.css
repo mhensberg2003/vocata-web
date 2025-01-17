@@ -579,3 +579,9 @@ body {
 .divider::after {
   right: 0;
 }
+
+/* Add this to your CSS file */
+.small-icon {
+  width: 32px; /* Adjust the size as needed */
+  height: 32px; /* Adjust the size as needed */
+}
