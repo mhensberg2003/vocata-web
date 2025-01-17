@@ -125,7 +125,7 @@ const handleStartChat = async () => {
 
                 {/* Start Chat Button */}
                 <button onClick={handleStartChat} disabled={!language || !topic}>
-                  Start Chat
+                  Start Chat ✨
                 </button>
               </div>
             </CSSTransition>
