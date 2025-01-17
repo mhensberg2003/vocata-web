@@ -39,7 +39,14 @@ const SummaryPage = () => {
     <div className="summary-container">
       <h1>Chat Summary</h1>
       {loading ? (
-        <p>Loading summary...</p>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem' }}>
+          <img 
+            src="/60fps-slower.gif" 
+            alt="Loading..."
+            style={{ width: '40px', height: '40px' }}
+            aria-label="Loading indicator"
+          />
+        </div>
       ) : (
         <>
           <p>{summary}</p>
