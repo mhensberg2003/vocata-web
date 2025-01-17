@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { sendMessageToOpenAI } from "./OpenAIService";
 import LoadingAnimation from './components/LoadingAnimation';
 import { translateTextWithOpenAI } from "./OpenAIService";
+import { useNavigate } from 'react-router-dom';
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
@@ -73,6 +75,10 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
     }
   };
 
+  const handleSummarize = () => {
+    navigate('/summary', { state: { messages } });
+  };
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -86,7 +92,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
         <span className="language-chip">{topic}</span>
       </div>
 
-      <button className="summarize-button" onClick={() => alert('Summarize')}>
+      <button className="summarize-button" onClick={handleSummarize}>
       </button>
 
       <div className="Messages" ref={scrollRef}>

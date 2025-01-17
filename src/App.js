@@ -11,6 +11,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Logout from './components/Logout';
+import SummaryPage from './components/SummaryPage';
+
 
 function App() {
   const [language, setLanguage] = useState(""); // User-selected language
@@ -148,6 +150,7 @@ const handleStartChat = async () => {
             </CSSTransition>
           </div>
         } />
+        <Route path="/summary" element={<SummaryPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
