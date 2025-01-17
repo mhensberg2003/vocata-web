@@ -585,3 +585,14 @@ body {
   width: 32px; /* Adjust the size as needed */
   height: 32px; /* Adjust the size as needed */
 }
+
+/* Assuming you have a CSS file linked to your component */
+.translate-button .translation-icon {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.translate-button:hover .translation-icon {
+  content: url('../public/translation.gif');
+}

@@ -123,7 +123,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
         onClick={handleTranslateLastMessage}
         disabled={isThinking || !messages.some(msg => msg.role === "assistant" && !msg.translated)}
       >
-        <img src="globe-icon.png" alt="Translate" />
+        <img src="translationstill.png" alt="Translate" className="translation-icon" />
       </button>
     </div>
   );
