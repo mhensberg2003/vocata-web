@@ -1,18 +1,20 @@
 .summary-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  text-align: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f4f4f8;
 }
 
 .summary-box {
   background: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
+  padding: 2rem;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
+  max-width: 600px;
+  width: 100%;
 }
 
 .summary-box h1 {
@@ -24,4 +26,77 @@
   font-size: 1rem;
   color: #555;
   margin-bottom: 20px;
+}
+
+.mistakes-section {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.mistakes-dropdown-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mistakes-dropdown-button:hover {
+  background: #f8f8f8;
+  border-color: #007bff;
+}
+
+.mistakes-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+.mistakes-list li {
+  padding: 1rem 1.5rem;
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.mistakes-list li:last-child {
+  border-bottom: none;
+}
+
+.no-mistakes {
+  padding: 1rem 1.5rem;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 } 

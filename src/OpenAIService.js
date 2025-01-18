@@ -151,10 +151,20 @@ Practice Suggestions:
     const grammarScore = grammarScoreMatch ? parseInt(grammarScoreMatch[1], 10) : null;
     const vocabularyScore = vocabularyScoreMatch ? parseInt(vocabularyScoreMatch[1], 10) : null;
 
+    // Updated regex to better capture mistakes
+    const mistakesMatch = content.match(/Common Mistakes:([^]*?)(?=Areas for Improvement:|$)/);
+    const mistakes = mistakesMatch 
+      ? mistakesMatch[1]
+        .split('-')
+        .map(mistake => mistake.trim())
+        .filter(mistake => mistake && !mistake.includes('Common Mistakes'))
+      : [];
+
     return { 
       summary: content,
       grammarScore: grammarScore,
-      vocabularyScore: vocabularyScore
+      vocabularyScore: vocabularyScore,
+      mistakes: mistakes
     };
   } catch (error) {
     console.error("OpenAI API Error:", error);
