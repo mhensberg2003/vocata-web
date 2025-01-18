@@ -119,7 +119,7 @@ Language Skills Assessment:
 - Grammar Score: [0-100]
 - Vocabulary Score: [0-100]
 - Vocabulary Usage: [Brief assessment of vocabulary level and variety]
-- Common Mistakes: [List 2-3 specific grammar or vocabulary mistakes if any. If there are no mistakes, say "No mistakes found"]
+- Common Mistakes: [List 2-3 specific grammar or vocabulary mistakes if any]
 
 Areas for Improvement:
 - [2-3 specific suggestions for improvement]
