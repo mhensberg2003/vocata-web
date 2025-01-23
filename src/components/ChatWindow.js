@@ -11,6 +11,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   const navigate = useNavigate();
   const [showSummaryPrompt, setShowSummaryPrompt] = useState(false);
   const [showSummaryIcon, setShowSummaryIcon] = useState(false);
+  const [canTranslate, setCanTranslate] = useState(false);
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
@@ -29,6 +30,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
 
       setMessages((prev) => {
         const newMessages = [...prev, assistantMessage];
+        setCanTranslate(true);
         // Check if we've reached 10 user messages after adding the AI response
         const userMessageCount = newMessages.filter(msg => msg.role === "user").length;
         if (userMessageCount === 10) {
@@ -79,6 +81,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
           ...lastAIMessage,
           translated: true,
         };
+        setCanTranslate(false);
         return [...updatedMessages, translationMessage];
       });
     } catch (error) {
@@ -159,7 +162,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       <button
         className="translate-button"
         onClick={handleTranslateLastMessage}
-        disabled={isThinking || !messages.some(msg => msg.role === "assistant" && !msg.translated)}
+        disabled={isThinking || !canTranslate}
       >
         <img src="translationstill.png" alt="Translate" className="translation-icon" />
       </button>
