@@ -718,6 +718,13 @@ body {
   max-width: 400px;
   width: 90%;
   text-align: center;
+  color: #333; /* Add this line to make the text dark */
+}
+
+.summary-prompt p {
+  color: #333; /* Add this line to specifically target the paragraph text */
+  margin-bottom: 15px;
+  font-size: 1.1rem;
 }
 
 .summary-prompt-buttons {
