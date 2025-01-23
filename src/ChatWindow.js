@@ -15,33 +15,36 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
     if (!newMessage.trim()) return;
 
     const userMessage = { role: "user", content: newMessage };
-    setMessages((prev) => {
-      const newMessages = [...prev, userMessage];
-      // Check if we've reached 10 user messages
-      const userMessageCount = newMessages.filter(msg => msg.role === "user").length;
-      if (userMessageCount === 10) {
-        setShowSummaryPrompt(true);
-      }
-      return newMessages;
-    });
+    setMessages((prev) => [...prev, userMessage]);
     setNewMessage("");
-
-    // Show typing
     setIsThinking(true);
 
     try {
       const assistantResponse = await sendMessageToOpenAI([...messages, userMessage]);
-      const assistantMessage = { role: "assistant", content: assistantResponse };
+      const assistantMessage = {
+        role: "assistant",
+        content: assistantResponse,
+      };
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      setMessages((prev) => {
+        const newMessages = [...prev, assistantMessage];
+        // Check if we've reached 10 user messages after adding the AI response
+        const userMessageCount = newMessages.filter(msg => msg.role === "user").length;
+        if (userMessageCount === 10) {
+          // Set a timeout to show the prompt 2 seconds after the AI's message
+          setTimeout(() => {
+            setShowSummaryPrompt(true);
+          }, 2000);
+        }
+        return newMessages;
+      });
     } catch (error) {
       console.error("Error sending message:", error);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Oops, something went wrong. Try again." },
+        { role: "assistant", content: "Sorry, I encountered an error. Please try again." },
       ]);
     } finally {
-      // Turn off typing
       setIsThinking(false);
     }
   };

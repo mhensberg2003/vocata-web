@@ -1,4 +1,5 @@
 import axios from "axios";
+const chatModel = "gpt-4o-mini";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -14,7 +15,7 @@ export const sendMessageToOpenAI = async (messages) => {
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4o-mini",
+        model: chatModel,
         messages: messages,
         max_tokens: 90,
         temperature: 0.7,
@@ -42,7 +43,7 @@ export const translateTextWithOpenAI = async (
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4o-mini", // or your preferred model
+        model: chatModel, // or your preferred model
         messages: [
           {
             role: "system",
@@ -76,7 +77,7 @@ export const eTextWithOpenAI = async (
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4o-mini", // or your preferred model
+        model: chatModel, // or your preferred model
         messages: [
           {
             role: "system",
@@ -107,7 +108,7 @@ export const summarizeChatWithOpenAI = async (messages, language) => {
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: "gpt-4o-mini",
+        model: chatModel,
         messages: [
           {
             role: "system",
