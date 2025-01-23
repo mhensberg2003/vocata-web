@@ -613,8 +613,8 @@ body {
   background: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;  /* Increased from 40px */
+  height: 48px; /* Increased from 40px */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -623,8 +623,13 @@ body {
   transition: transform 0.2s;
 }
 
+.summarize-button .summarize-icon {
+  font-size: 24px; /* Increased from default size */
+}
+
 .summarize-button:hover {
   transform: scale(1.1);
+  background-color: #f0f0f0;
 }
 
 .summary-container {
