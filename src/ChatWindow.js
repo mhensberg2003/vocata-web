@@ -8,12 +8,22 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   const [newMessage, setNewMessage] = useState("");
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+  const [showSummaryPrompt, setShowSummaryPrompt] = useState(false);
+  const [showSummaryIcon, setShowSummaryIcon] = useState(false);
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
 
     const userMessage = { role: "user", content: newMessage };
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => {
+      const newMessages = [...prev, userMessage];
+      // Check if we've reached 10 user messages
+      const userMessageCount = newMessages.filter(msg => msg.role === "user").length;
+      if (userMessageCount === 10) {
+        setShowSummaryPrompt(true);
+      }
+      return newMessages;
+    });
     setNewMessage("");
 
     // Show typing
@@ -79,6 +89,15 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
     navigate('/summary', { state: { messages } });
   };
 
+  const handleSummaryPromptResponse = (wantsSummary) => {
+    setShowSummaryPrompt(false);
+    if (wantsSummary) {
+      handleSummarize();
+    } else {
+      setShowSummaryIcon(true);
+    }
+  };
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -133,6 +152,24 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       >
         <img src="translationstill.png" alt="Translate" className="translation-icon" />
       </button>
+
+      {showSummaryPrompt && (
+        <div className="summary-prompt-overlay">
+          <div className="summary-prompt">
+            <p>You've had 10 messages! Would you like to end the chat and get a summary?</p>
+            <div className="summary-prompt-buttons">
+              <button onClick={() => handleSummaryPromptResponse(true)}>Yes, get summary</button>
+              <button onClick={() => handleSummaryPromptResponse(false)}>No, continue chatting</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSummaryIcon && (
+        <button className="summarize-button" onClick={handleSummarize}>
+          <span className="summarize-icon">📝</span>
+        </button>
+      )}
     </div>
   );
 }

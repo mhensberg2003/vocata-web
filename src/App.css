@@ -610,27 +610,21 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 40px;
-  height: 40px;
-  background: #ffffff;
+  background: white;
   border: none;
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 .summarize-button:hover {
-  background-color: #f0f0f0;
-}
-
-.summarize-button::before {
-  content: "\1F4DD"; /* Unicode for a memo emoji */
-  font-size: 20px;
-  color: #333;
+  transform: scale(1.1);
 }
 
 .summary-container {
@@ -701,4 +695,52 @@ body {
   right: 0;
   bottom: 0;
   z-index: 1;
+}
+
+.summary-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.summary-prompt {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.summary-prompt-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.summary-prompt-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.summary-prompt-buttons button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.summary-prompt-buttons button:last-child {
+  background-color: #6c757d;
+  color: white;
 }
