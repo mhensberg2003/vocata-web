@@ -154,4 +154,34 @@
       opacity: 0.2;
     }
   }
+
+  /* Translate Button */
   
+  .translate-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffffff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .translate-button:hover .translation-icon {
+    content: url('/public/translation.gif');
+  }
+
+  .translation-icon {
+    width: 32px;
+    height: 32px;
+    transition: all 0.3s ease;
+  }

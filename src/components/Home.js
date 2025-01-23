@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import "../css/Home.css";
 
 function Home() {
   const navigate = useNavigate();

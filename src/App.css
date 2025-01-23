@@ -28,89 +28,6 @@ body {
   margin: 5px 0 0;
 }
 
-/* Welcome Description */
-.Setup {
-  text-align: center;
-  padding: 40px;
-}
-
-.Setup h1 {
-  font-size: 2rem;
-  color: #000;
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
-.Setup p {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-.Setup input {
-  margin: 10px 0;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 400px;
-}
-
-.Setup button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.Setup button:disabled {
-  background: #aaa;
-  cursor: not-allowed;
-}
-
-.Setup button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.translate-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ffffff;
-  border: none;
-  width: 48px;
-  height: 48px;
-  padding: 8px;
-  border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.translate-button img {
-  width: 32px;
-  height: 32px;
-}
-
-.translate-button:hover {
-  transform: scale(1.1); /* Slight zoom on hover */
-}
-
-/* Globe Icon */
-.globe-icon {
-  width: 80px; /* Adjust the size of the icon */
-  height: auto;
-  margin: 0 auto;
-  display: block; /* Center the icon */
-  margin-bottom: 1px; /* Add spacing below the icon */
-}
-
 /* Dropdown Styling */
 .dropdown {
   width: 80%;
@@ -176,74 +93,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9; /* Optional: Change the background color */
-}
-
-.Setup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff; /* Optional: Add a card-like background */
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-  max-width: 400px;
-  width: 90%; /* Responsive for smaller screens */
-}
-
-.Setup h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.Setup p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.Setup select,
-.Setup input {
-  width: 100%; /* Ensures both elements have the same width */
-  padding: 12px; /* Uniform padding for consistent appearance */
-  margin: 10px 0; /* Add consistent spacing */
-  font-size: 1rem; /* Same font size for both */
-  border: 1px solid #ddd; /* Same border */
-  border-radius: 5px; /* Rounded corners for a clean look */
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.Setup select:focus,
-.Setup input:focus {
-  border-color: #007bff; /* Highlight border on focus */
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
-}
-
-.Setup select {
-  appearance: none; /* Remove default browser dropdown styling */
-  background: white
-    url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23cccccc' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
-    no-repeat right 10px center; /* Custom dropdown arrow */
-  background-size: 10px; /* Size of the arrow icon */
-}
-
-.Setup button {
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.2s;
-}
-
-.Setup button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.Setup button:hover:not(:disabled) {
-  background-color: #0056b3;
 }
 
 .globe-icon {
@@ -388,19 +237,6 @@ body {
   text-decoration: underline;
 }
 
-.Setup {
-  position: relative; /* Add this line */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
-}
 
 .Home-container {
   display: flex;
@@ -463,17 +299,6 @@ body {
 .small-icon {
   width: 32px; /* Adjust the size as needed */
   height: 32px; /* Adjust the size as needed */
-}
-
-/* Assuming you have a CSS file linked to your component */
-.translate-button .translation-icon {
-  width: 32px;
-  height: 32px;
-  transition: all 0.3s ease;
-}
-
-.translate-button:hover .translation-icon {
-  content: url('../public/translation.gif');
 }
 
 .summarize-button {

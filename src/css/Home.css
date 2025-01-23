@@ -1,0 +1,89 @@
+.Setup {
+    position: relative; /* Add this line */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+  }
+
+  .Setup p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+
+  .Setup button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .Setup h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #000;
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+  
+  .Setup p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+    padding-top: 0px;
+    margin-top: 0px;
+  }
+  
+  .Setup select,
+  .Setup input {
+    width: 100%; /* Ensures both elements have the same width */
+    padding: 12px; /* Uniform padding for consistent appearance */
+    margin: 10px 0; /* Add consistent spacing */
+    font-size: 1rem; /* Same font size for both */
+    border: 1px solid #ddd; /* Same border */
+    border-radius: 5px; /* Rounded corners for a clean look */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .Setup select:focus,
+  .Setup input:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+  }
+  
+  .Setup select {
+    appearance: none; /* Remove default browser dropdown styling */
+    background: white
+      url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23cccccc' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
+      no-repeat right 10px center; /* Custom dropdown arrow */
+    background-size: 10px; /* Size of the arrow icon */
+  }
+  
+  .Setup button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+  }
+  
+  .Setup button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .Setup button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
