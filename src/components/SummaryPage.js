@@ -66,7 +66,6 @@ const SummaryPage = () => {
           </div>
         ) : (
           <>
-            <p>{summary}</p>
             <h2>Grammar Score: {grammarScore !== null ? grammarScore : 'Unavailable'}</h2>
             <h2>Vocabulary Score: {vocabularyScore !== null ? vocabularyScore : 'Unavailable'}</h2>
             
