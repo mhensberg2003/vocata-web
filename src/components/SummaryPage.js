@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { summarizeChatWithOpenAI } from '../OpenAIService';
-import './SummaryPage.css';
+import { summarizeChatWithOpenAI } from './ai/OpenAIService';
+import '../css/SummaryPage.css';
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 const SummaryPage = () => {

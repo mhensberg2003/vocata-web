@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { sendMessageToOpenAI } from "./OpenAIService";
-import LoadingAnimation from './components/LoadingAnimation';
-import { translateTextWithOpenAI } from "./OpenAIService";
+import { sendMessageToOpenAI } from "./ai/OpenAIService";
+import LoadingAnimation from './LoadingAnimation';
+import { translateTextWithOpenAI } from "./ai/OpenAIService";
 import { useNavigate } from 'react-router-dom';
+import '../css/Chat.css';
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");

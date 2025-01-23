@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
-import { signInWithGoogle } from '../firebase/auth';
+import { signInWithGoogle } from './firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {

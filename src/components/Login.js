@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
-import { signInWithGoogle } from '../firebase/auth';
+import { signInWithGoogle } from './firebase/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
