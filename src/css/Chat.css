@@ -1,12 +1,14 @@
 /* Chat Container */
 .Chat-container {
     display: flex;
+    padding: 20px;
+    border-radius: 10px;
     flex-direction: column;
     height: 80vh;
     width: 90%;
     max-width: 600px;
     margin: 20px auto;
-    background: white;
+    background: #f4f4f8;
     border: 1px solid #ddd;
     border-radius: 12px;
     overflow: hidden;
@@ -23,6 +25,18 @@
     overflow-y: auto;
     padding: 15px;
     background: #f4f4f8;
+  }
+
+  .Message.welcome {
+    background: transparent; /* No background */
+    color: #555; /* Neutral text color */
+    font-size: 1rem; /* Adjust font size */
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    opacity: 0.6; /* Add opacity */
   }
   
   .Message {
@@ -184,4 +198,24 @@
     width: 32px;
     height: 32px;
     transition: all 0.3s ease;
+  }
+
+  /* Language Chips */
+  .language-chips {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .language-chip {
+    display: inline-block;
+    background: #f4f4f8; /* Match the page background */
+    color: #333; /* Neutral text color */
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: none; /* Remove box shadow for a flat look */
+    border: 1px solid #e0e0e0; /* Subtle border for separation */
   }

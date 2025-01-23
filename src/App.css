@@ -1,90 +1,4 @@
 /* Global Styles */
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f8;
-  color: #333;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #007bff;
-  color: white;
-  padding: 20px;
-  border-bottom: 3px solid #0056b3;
-}
-
-.App-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-.App-header p {
-  font-size: 1rem;
-  margin: 5px 0 0;
-}
-
-/* Dropdown Styling */
-.dropdown {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px;
-  margin: 10px auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: white;
-  appearance: none; /* Remove default browser styling */
-  text-align: left;
-}
-
-.dropdown:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.Message.welcome {
-  background: transparent; /* No background */
-  color: #555; /* Neutral text color */
-  font-size: 1rem; /* Adjust font size */
-  padding: 10px;
-  margin: 20px auto;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 80%;
-  opacity: 0.6; /* Add opacity */
-}
-
-.language-chip {
-  display: inline-block;
-  background: #f4f4f8; /* Match the page background */
-  color: #333; /* Neutral text color */
-  border-radius: 10px;
-  padding: 5px 15px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  box-shadow: none; /* Remove box shadow for a flat look */
-  border: 1px solid #e0e0e0; /* Subtle border for separation */
-}
-
-.language-chips {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.Chat-container {
-  background: #f4f4f8; /* Match page background */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: none; /* Optional: Remove any shadow for a cleaner look */
-}
 
 .App {
   text-align: center;
@@ -93,11 +7,9 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9; /* Optional: Change the background color */
-}
-
-.globe-icon {
-  width: 60px;
-  margin-bottom: 0px;
+  z-index: 1;
+  position: relative;
+  flex-direction: column;
 }
 
 .background {
@@ -108,17 +20,6 @@ body {
   height: 100vh;
   z-index: -1; /* Send it to the background */
   pointer-events: none;
-}
-
-.App {
-  position: relative;
-  z-index: 1; /* Ensure content appears above the background */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  color: #ffffff; /* Adjust text color for visibility */
 }
 
 /* Replace the existing page transition styles with these */
@@ -148,72 +49,13 @@ body {
   position: absolute;
 }
 
-/* Add this new wrapper class */
-.transition-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Add these new styles */
-.animate-container {
-  transform: rotate(45deg);
-  width: 12px;
-  height: 12px;
-  position: relative;
-  margin: 20px auto;
-}
-
-.animate-circle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #3B82F6;
-  animation: pulse 1.2s ease-in-out infinite;
-}
-
-.animate-circle:nth-child(1) {
-  top: 0;
-  left: 0;
-}
-
-.animate-circle:nth-child(2) {
-  top: 0;
-  right: 0;
-}
-
-.animate-circle:nth-child(3) {
-  bottom: 0;
-  right: 0;
-}
-
-.animate-circle:nth-child(4) {
-  bottom: 0;
-  left: 0;
-}
-
-.delay-150 {
-  animation-delay: 0.3s;
-}
-
-.delay-300 {
-  animation-delay: 0.6s;
-}
-
-.delay-450 {
-  animation-delay: 0.9s;
-}
-
 .loading-text {
   color: #6B7280;
   margin-top: 1rem;
   font-family: inherit;
 }
 
+/* Default Pulse Animation */
 @keyframes pulse {
   0% {
     transform: scale(1);
