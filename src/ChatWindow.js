@@ -111,8 +111,11 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
         <span className="language-chip">{topic}</span>
       </div>
 
-      <button className="summarize-button" onClick={handleSummarize}>
-      </button>
+      {showSummaryIcon && (
+        <button className="summarize-button" onClick={handleSummarize}>
+          <span className="summarize-icon">📝</span>
+        </button>
+      )}
 
       <div className="Messages" ref={scrollRef}>
         <div className="Message welcome">
@@ -163,12 +166,6 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
             </div>
           </div>
         </div>
-      )}
-
-      {showSummaryIcon && (
-        <button className="summarize-button" onClick={handleSummarize}>
-          <span className="summarize-icon">📝</span>
-        </button>
       )}
     </div>
   );
