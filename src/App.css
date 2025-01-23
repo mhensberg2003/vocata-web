@@ -99,6 +99,12 @@ body {
   outline: none;
 }
 
+.Input-container input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 .Input-container input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -121,8 +127,9 @@ body {
 }
 
 .Input-container button:disabled {
-  background: #aaa;
+  background-color: #cccccc;
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* Typing Indicator */
