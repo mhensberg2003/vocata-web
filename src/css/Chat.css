@@ -135,6 +135,12 @@
     cursor: not-allowed;
     opacity: 0.7;
   }
+
+  .loading-text {
+    color: #6B7280;
+    margin-top: 1rem;
+    font-family: inherit;
+  }
   
   /* Typing Indicator */
   .typing-indicator {
@@ -219,3 +225,32 @@
     box-shadow: none; /* Remove box shadow for a flat look */
     border: 1px solid #e0e0e0; /* Subtle border for separation */
   }
+
+  /* Summarize Button */
+  .summarize-button {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;  /* Increased from 40px */
+    height: 48px; /* Increased from 40px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .summarize-icon {
+    font-size: 24px;
+  }
+
+  .summarize-button:hover {
+    transform: scale(1.1);
+    background-color: #f0f0f0;
+  }
+  

@@ -49,24 +49,7 @@
   position: absolute;
 }
 
-.loading-text {
-  color: #6B7280;
-  margin-top: 1rem;
-  font-family: inherit;
-}
-
-/* Default Pulse Animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+/* Logout Link */
 
 .logout-link {
   position: absolute;
@@ -79,6 +62,7 @@
   text-decoration: underline;
 }
 
+/* Home Container */
 
 .Home-container {
   display: flex;
@@ -86,6 +70,8 @@
   align-items: center;
   height: 100vh;
 }
+
+/* Google Button */
 
 .google-button {
   display: flex;
@@ -113,110 +99,13 @@
   height: 18px;
 }
 
-.divider {
-  margin: 20px 0;
-  text-align: center;
-  position: relative;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background-color: #ddd;
-}
-
-.divider::before {
-  left: 0;
-}
-
-.divider::after {
-  right: 0;
-}
-
-/* Add this to your CSS file */
+/* Loading Animation */
 .small-icon {
   width: 32px; /* Adjust the size as needed */
   height: 32px; /* Adjust the size as needed */
 }
 
-.summarize-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: white;
-  border: none;
-  border-radius: 50%;
-  width: 48px;  /* Increased from 40px */
-  height: 48px; /* Increased from 40px */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.summarize-button .summarize-icon {
-  font-size: 24px; /* Increased from default size */
-}
-
-.summarize-button:hover {
-  transform: scale(1.1);
-  background-color: #f0f0f0;
-}
-
-.summary-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.summary-container h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.summary-container p {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
-  text-align: left;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.summary-container h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-top: 20px;
-}
-
-.summary-container .loading-text {
-  color: #6B7280;
-  font-size: 1.1rem;
-  margin: 20px 0;
-}
-
 /* Add animation for loading state */
-.summary-container .loading-text {
-  animation: pulse 1.5s infinite;
-}
 
 @keyframes pulse {
   0% { opacity: 0.6; }
@@ -224,72 +113,3 @@
   100% { opacity: 0.6; }
 }
 
-/* Add this new class */
-.summary-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
-.summary-prompt-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.summary-prompt {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  color: #333; /* Add this line to make the text dark */
-}
-
-.summary-prompt p {
-  color: #333; /* Add this line to specifically target the paragraph text */
-  margin-bottom: 15px;
-  font-size: 1.1rem;
-}
-
-.summary-prompt-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.summary-prompt-buttons button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.summary-prompt-buttons button:first-child {
-  background-color: #007bff;
-  color: white;
-}
-
-.summary-prompt-buttons button:last-child {
-  background-color: #6c757d;
-  color: white;
-}
