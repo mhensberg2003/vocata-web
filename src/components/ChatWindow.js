@@ -13,6 +13,14 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   const [showSummaryIcon, setShowSummaryIcon] = useState(false);
   const [canTranslate, setCanTranslate] = useState(false);
 
+  useEffect(() => {
+    // Enable translation if there's any untranslated AI message
+    const hasUntranslatedMessage = messages.some(
+      (msg) => msg.role === "assistant" && !msg.translated
+    );
+    setCanTranslate(hasUntranslatedMessage);
+  }, [messages]);
+
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
 
@@ -26,6 +34,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       const assistantMessage = {
         role: "assistant",
         content: assistantResponse,
+        translated: false,
       };
 
       setMessages((prev) => {

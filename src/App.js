@@ -35,7 +35,7 @@ const handleStartChat = async () => {
 
     const initialPrompt = {
       role: "user",
-      content: `Please generate an engaging first question + welcome messageto start a conversation about ${topic}. Only the message, no other text, no quotation marks.`,
+      content: `Please generate an engaging first question + welcome message to start a conversation about ${topic}. Only the message, no other text, no quotation marks.`,
     };
 
     setMessages([systemMessage]); // Add system message first
@@ -50,6 +50,7 @@ const handleStartChat = async () => {
       const initialQuestion = {
         role: "assistant",
         content: assistantResponse, // AI-generated question
+        translated: false, // Initialize translated property
       };
 
       // Add the initial question to the conversation
@@ -59,6 +60,7 @@ const handleStartChat = async () => {
       const errorMessage = {
         role: "assistant",
         content: "Oops! Something went wrong. Please try starting the chat again.",
+        translated: false, // Initialize translated property
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
     } finally {
