@@ -294,6 +294,8 @@ Install vocata-web using one of the following methods:
 
 ```sh
 ❯ npm install
+❯ npm i -g vercel
+
 ```
 
 
@@ -304,7 +306,7 @@ Run vocata-web using the following command:
 **Using `npm`** &nbsp; [<img align="center" src="https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white" />](https://www.npmjs.com/)
 
 ```sh
-❯ npm start
+❯ vercel dev
 ```
 
 
@@ -320,9 +322,7 @@ Run the test suite using the following command:
 ---
 ## 📌 Project Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
+- N/A
 
 ---
 
