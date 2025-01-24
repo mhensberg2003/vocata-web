@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { summarizeChatWithOpenAI } from './ai/OpenAIService';
 import '../css/SummaryPage.css';
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 const SummaryPage = () => {
   const location = useLocation();
-  const { messages, language } = location.state || { messages: [], language: 'English' };
+  const navigate = useNavigate();
+  const { messages, language } = location.state || {};
   const messagesRef = useRef(messages);
   const [summary, setSummary] = useState('');
   const [grammarScore, setGrammarScore] = useState(null);
@@ -14,6 +15,12 @@ const SummaryPage = () => {
   const [mistakes, setMistakes] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!messages || !language) {
+      navigate('/'); // Redirect to home or chat window
+    }
+  }, [messages, language, navigate]);
 
   useEffect(() => {
     console.log("useEffect triggered");

@@ -102,7 +102,9 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   };
 
   const handleSummarize = () => {
-    navigate('/summary', { state: { messages } });
+    if (messages.length > 0) {
+      navigate('/summary', { state: { messages, language } });
+    }
   };
 
   const handleSummaryPromptResponse = (wantsSummary) => {
