@@ -27,27 +27,29 @@ function ChatHistory({ onSelectChat }) {
   if (error) return <div className="chat-history-error">{error}</div>;
   if (chats.length === 0) return <div className="chat-history-empty">No previous chats found</div>;
 
+  const getChatTitle = (chat) => {
+    const date = new Date(chat.timestamp.seconds * 1000);
+    return `${chat.language} conversation about ${chat.topic}`;
+  };
+
   return (
     <div className="chat-history-container">
-      <h2>Recent Conversations</h2>
+      <h2>Your Past Conversations</h2>
       <div className="chat-history-list">
         {chats.map((chat) => (
-          <div key={chat.id} className="chat-history-item" onClick={() => onSelectChat(chat)}>
+          <div key={chat.id} className="chat-history-item">
             <div className="chat-history-header">
-              <span className="chat-language">{chat.language}</span>
-              <span className="chat-topic">{chat.topic}</span>
+              <h3>{getChatTitle(chat)}</h3>
               <span className="chat-date">
                 {new Date(chat.timestamp.seconds * 1000).toLocaleDateString()}
               </span>
             </div>
-            <div className="chat-preview">
-              {chat.messages.slice(-2).map((msg, index) => (
-                <div key={index} className={`chat-message ${msg.role}`}>
-                  <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content.slice(0, 100)}
-                  {msg.content.length > 100 ? '...' : ''}
-                </div>
-              ))}
-            </div>
+            <button 
+              className="continue-chat-button"
+              onClick={() => onSelectChat(chat)}
+            >
+              Continue Chat
+            </button>
           </div>
         ))}
       </div>
