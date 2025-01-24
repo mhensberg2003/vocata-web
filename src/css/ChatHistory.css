@@ -1,71 +1,107 @@
 .chat-history-container {
-  padding: 20px;
+  padding: 30px;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
 }
 
 .chat-history-container h2 {
-  color: #333;
-  margin-bottom: 20px;
+  color: #2c3e50;
+  margin-bottom: 30px;
   text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .chat-history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .chat-history-item {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #eef2f7;
+}
+
+.chat-history-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .chat-history-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .chat-history-header h3 {
   margin: 0;
-  color: #333;
-  font-size: 1.1rem;
+  color: #1a73e8;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .chat-date {
-  color: #666;
+  color: #64748b;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .continue-chat-button {
-  background: #007bff;
+  background: #1a73e8;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   width: 100%;
   font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .continue-chat-button:hover {
-  background: #0056b3;
+  background: #1557b0;
+  transform: translateY(-2px);
+}
+
+.continue-chat-button:active {
+  transform: translateY(0);
 }
 
 .chat-history-loading,
 .chat-history-error,
 .chat-history-empty {
   text-align: center;
-  padding: 20px;
-  color: #666;
+  padding: 40px;
+  color: #64748b;
+  font-size: 1.1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .chat-history-error {
-  color: #dc3545;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+.chat-history-loading {
+    margin-top: 20px;
 }
