@@ -11,6 +11,7 @@ function ChatHistory({ onSelectChat }) {
     const fetchChats = async () => {
       try {
         const fetchedChats = await getLastFiveChats();
+        console.log('Fetched chats in component:', fetchedChats.length);
         setChats(fetchedChats);
       } catch (err) {
         setError('Failed to load chat history');
@@ -27,21 +28,18 @@ function ChatHistory({ onSelectChat }) {
   if (error) return <div className="chat-history-error">{error}</div>;
   if (chats.length === 0) return <div className="chat-history-empty">No previous chats found</div>;
 
-  const getChatTitle = (chat) => {
-    const date = new Date(chat.timestamp.seconds * 1000);
-    return `${chat.language} conversation about ${chat.topic}`;
-  };
+  console.log('Rendering chats:', chats.length);
 
   return (
     <div className="chat-history-container">
-      <h2>Your Past Conversations</h2>
+      <h2>Your Past Conversations ({chats.length})</h2>
       <div className="chat-history-list">
         {chats.map((chat) => (
           <div key={chat.id} className="chat-history-item">
             <div className="chat-history-header">
-              <h3>{getChatTitle(chat)}</h3>
+              <h3>{chat.language} conversation about {chat.topic}</h3>
               <span className="chat-date">
-                {new Date(chat.timestamp.seconds * 1000).toLocaleDateString()}
+                {new Date(chat.lastMessageAt.seconds * 1000).toLocaleDateString()}
               </span>
             </div>
             <button 

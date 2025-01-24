@@ -1,4 +1,4 @@
-import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc, where, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc, where, updateDoc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { initializeFirestore } from './firebaseConfig';
 
@@ -17,13 +17,13 @@ export const saveChat = async (messages, language, topic) => {
     const userChatsRef = collection(db, 'users', user.uid, 'chats');
     
     // Query for existing chat with same language and topic
-    const q = query(
+    const existingChatQuery = query(
       userChatsRef,
       where('language', '==', language),
       where('topic', '==', topic)
     );
     
-    const querySnapshot = await getDocs(q);
+    const existingChatSnapshot = await getDocs(existingChatQuery);
     
     const chatData = {
       userId: user.uid,
@@ -33,17 +33,36 @@ export const saveChat = async (messages, language, topic) => {
       lastMessageAt: new Date()
     };
 
-    if (!querySnapshot.empty) {
-      // Update existing chat
-      const existingChat = querySnapshot.docs[0];
+    // If this is an existing chat, just update it
+    if (!existingChatSnapshot.empty) {
+      const existingChat = existingChatSnapshot.docs[0];
       await updateDoc(existingChat.ref, chatData);
+      console.log('Updated existing chat:', existingChat.id);
       return existingChat.id;
-    } else {
-      // Create new chat
-      chatData.timestamp = new Date(); // Only set timestamp for new chats
-      const docRef = await addDoc(userChatsRef, chatData);
-      return docRef.id;
     }
+
+    // If this is a new chat, check the total count first
+    const allChatsQuery = query(
+      userChatsRef,
+      orderBy('lastMessageAt', 'desc')
+    );
+    
+    const allChatsSnapshot = await getDocs(allChatsQuery);
+    const totalChats = allChatsSnapshot.docs.length;
+    console.log('Current total chats:', totalChats);
+
+    // If at limit, delete the oldest chat before adding new one
+    if (totalChats >= 5) {
+      const oldestChat = allChatsSnapshot.docs[allChatsSnapshot.docs.length - 1];
+      await deleteDoc(oldestChat.ref);
+      console.log('Deleted oldest chat:', oldestChat.id);
+    }
+
+    // Now create the new chat
+    chatData.timestamp = new Date();
+    const docRef = await addDoc(userChatsRef, chatData);
+    console.log('Created new chat:', docRef.id);
+    return docRef.id;
   } catch (error) {
     console.error('Error saving chat:', error);
     throw error;
@@ -78,6 +97,14 @@ export const getLastFiveChats = async () => {
         ...doc.data()
       });
     });
+
+    console.log('Retrieved chats:', chats.length);
+    console.log('Chat details:', chats.map(chat => ({
+      id: chat.id,
+      language: chat.language,
+      topic: chat.topic,
+      lastMessageAt: chat.lastMessageAt
+    })));
 
     return chats;
   } catch (error) {
