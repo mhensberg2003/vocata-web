@@ -4,6 +4,7 @@ import LoadingAnimation from './LoadingAnimation';
 import { translateTextWithOpenAI } from "./ai/OpenAIService";
 import { useNavigate } from 'react-router-dom';
 import '../css/Chat.css';
+import { saveChat } from "./ai/OpenAIService";
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");
@@ -61,6 +62,20 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       setIsThinking(false);
     }
   };
+
+  useEffect(() => {
+    const saveMessages = async () => {
+      if (messages.length > 0) {
+        try {
+          await saveChat(messages, language, topic);
+        } catch (error) {
+          console.error('Error saving chat:', error);
+        }
+      }
+    };
+    
+    saveMessages();
+  }, [messages, language, topic]);
 
   const handleTranslateLastMessage = async () => {
     const lastAIMessageIndex = messages

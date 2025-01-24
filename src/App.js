@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Logout from './components/Logout';
 import SummaryPage from './components/SummaryPage';
+import ChatHistory from './components/ChatHistory';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   const [started, setStarted] = useState(false); // Whether the chat has started
   const [messages, setMessages] = useState([]); // Chat messages
   const [isThinking, setIsThinking] = useState(false); // Whether the AI is thinking
+  const [showHistory, setShowHistory] = useState(false);
 
   // Handle starting the chat
   
@@ -70,6 +72,9 @@ const handleStartChat = async () => {
   }
 };
 
+const toggleHistory = () => {
+  setShowHistory(!showHistory);
+};
 
   return (
     <Router>
@@ -85,6 +90,26 @@ const handleStartChat = async () => {
                 />
               </ShaderGradientCanvas>
             </div>
+
+            {!started && (
+              <button 
+                className="history-toggle-button"
+                onClick={toggleHistory}
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  left: '10px',
+                  padding: '8px 16px',
+                  background: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                {showHistory ? 'Back' : 'View Past Chats'}
+              </button>
+            )}
 
             {/* Main Content with Transition */}
             <CSSTransition
@@ -139,22 +164,32 @@ const handleStartChat = async () => {
               </div>
             </CSSTransition>
 
-            <CSSTransition
-              in={started}
-              timeout={300}
-              classNames="page-transition"
-              unmountOnExit
-            >
-              <ChatWindow
-                messages={messages}
-                setMessages={setMessages}
-                language={language}
-                topic={topic}
-                isThinking={isThinking}
-                setIsThinking={setIsThinking}
-                LoadingComponent={LoadingAnimation}
-              />
-            </CSSTransition>
+            {!started && showHistory ? (
+              <ChatHistory onSelectChat={(selectedChat) => {
+                setMessages(selectedChat.messages);
+                setLanguage(selectedChat.language);
+                setTopic(selectedChat.topic);
+                setStarted(true);
+                setShowHistory(false);
+              }} />
+            ) : (
+              <CSSTransition
+                in={started}
+                timeout={300}
+                classNames="page-transition"
+                unmountOnExit
+              >
+                <ChatWindow
+                  messages={messages}
+                  setMessages={setMessages}
+                  language={language}
+                  topic={topic}
+                  isThinking={isThinking}
+                  setIsThinking={setIsThinking}
+                  LoadingComponent={LoadingAnimation}
+                />
+              </CSSTransition>
+            )}
           </div>
         } />
         <Route path="/summary" element={<SummaryPage />} />

@@ -1,7 +1,14 @@
 import axios from "axios";
+import { collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { initializeFirestore } from "../firebase/firebaseConfig";
+import { getFirestore } from 'firebase/firestore';
+
 const chatModel = "gpt-4o-mini";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+
+let db = null;
 
 const getApiKey = async () => {
   const response = await fetch('/api/getApiKey');
@@ -170,5 +177,35 @@ Practice Suggestions:
   } catch (error) {
     console.error("OpenAI API Error:", error);
     throw new Error("Failed to analyze chat performance.");
+  }
+};
+
+export const saveChat = async (messages, language, topic) => {
+  if (!db) {
+    db = await initializeFirestore();
+  }
+  const auth = getAuth();
+  const user = auth.currentUser;
+  
+  if (!user) {
+    throw new Error('User must be authenticated to save chats');
+  }
+
+  try {
+    const chatData = {
+      userId: user.uid,
+      messages,
+      language,
+      topic,
+      timestamp: new Date(),
+      lastMessageAt: new Date()
+    };
+
+    const userChatsRef = collection(db, 'users', user.uid, 'chats');
+    const docRef = await addDoc(userChatsRef, chatData);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error saving chat:', error);
+    throw error;
   }
 };
