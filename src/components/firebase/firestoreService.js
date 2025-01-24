@@ -1,4 +1,4 @@
-import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, limit, getDocs, addDoc, where, updateDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { initializeFirestore } from './firebaseConfig';
 
@@ -14,18 +14,36 @@ export const saveChat = async (messages, language, topic) => {
   }
 
   try {
+    const userChatsRef = collection(db, 'users', user.uid, 'chats');
+    
+    // Query for existing chat with same language and topic
+    const q = query(
+      userChatsRef,
+      where('language', '==', language),
+      where('topic', '==', topic)
+    );
+    
+    const querySnapshot = await getDocs(q);
+    
     const chatData = {
       userId: user.uid,
       messages,
       language,
       topic,
-      timestamp: new Date(),
       lastMessageAt: new Date()
     };
 
-    const userChatsRef = collection(db, 'users', user.uid, 'chats');
-    const docRef = await addDoc(userChatsRef, chatData);
-    return docRef.id;
+    if (!querySnapshot.empty) {
+      // Update existing chat
+      const existingChat = querySnapshot.docs[0];
+      await updateDoc(existingChat.ref, chatData);
+      return existingChat.id;
+    } else {
+      // Create new chat
+      chatData.timestamp = new Date(); // Only set timestamp for new chats
+      const docRef = await addDoc(userChatsRef, chatData);
+      return docRef.id;
+    }
   } catch (error) {
     console.error('Error saving chat:', error);
     throw error;

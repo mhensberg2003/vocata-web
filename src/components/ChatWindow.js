@@ -4,7 +4,7 @@ import LoadingAnimation from './LoadingAnimation';
 import { translateTextWithOpenAI } from "./ai/OpenAIService";
 import { useNavigate } from 'react-router-dom';
 import '../css/Chat.css';
-import { saveChat } from "./ai/OpenAIService";
+import { saveChat } from './firebase/firestoreService';
 
 function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsThinking }) {
   const [newMessage, setNewMessage] = useState("");
@@ -65,7 +65,8 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
 
   useEffect(() => {
     const saveMessages = async () => {
-      if (messages.length > 0) {
+      // Only save if we have more than just the system message
+      if (messages.length > 1) {
         try {
           await saveChat(messages, language, topic);
         } catch (error) {
@@ -74,7 +75,12 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
       }
     };
     
-    saveMessages();
+    // Add a debounce to prevent rapid saves
+    const timeoutId = setTimeout(() => {
+      saveMessages();
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
   }, [messages, language, topic]);
 
   const handleTranslateLastMessage = async () => {
