@@ -165,13 +165,27 @@ const toggleHistory = () => {
             </CSSTransition>
 
             {!started && showHistory ? (
-              <ChatHistory onSelectChat={(selectedChat) => {
-                setMessages(selectedChat.messages);
-                setLanguage(selectedChat.language);
-                setTopic(selectedChat.topic);
-                setStarted(true);
-                setShowHistory(false);
-              }} />
+              <div className="chat-history-overlay" onClick={(e) => {
+                if (e.target.className === 'chat-history-overlay') {
+                  setShowHistory(false);
+                }
+              }}>
+                <ChatHistory 
+                  onSelectChat={(selectedChat) => {
+                    setMessages(selectedChat.messages);
+                    setLanguage(selectedChat.language);
+                    setTopic(selectedChat.topic);
+                    setStarted(true);
+                    setShowHistory(false);
+                  }} 
+                />
+                <button 
+                  className="close-button" 
+                  onClick={() => setShowHistory(false)}
+                >
+                  ×
+                </button>
+              </div>
             ) : (
               <CSSTransition
                 in={started}

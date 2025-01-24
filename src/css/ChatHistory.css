@@ -1,14 +1,27 @@
 .chat-history-container {
+  position: relative;
   padding: 30px;
   max-width: 800px;
-  margin: 50px auto;
+  width: 90%;
+  margin: 0 auto;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
-  position: relative;
   overflow-y: auto;
-  max-height: calc(100vh - 160px);
+  max-height: 80vh;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chat-history-container h2 {
@@ -104,4 +117,36 @@
 
 .chat-history-loading {
     margin-top: 20px;
+}
+
+.chat-history-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s ease;
+  z-index: 1001;
+}
+
+.close-button:hover {
+  color: #1a73e8;
 }
