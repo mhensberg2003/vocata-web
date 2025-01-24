@@ -125,6 +125,11 @@ const handleStartChat = async () => {
                   placeholder="Enter a topic (e.g., Travel)"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && language && topic) {
+                      handleStartChat();
+                    }
+                  }}
                 />
 
                 {/* Start Chat Button */}
