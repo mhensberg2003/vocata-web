@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { summarizeChatWithOpenAI } from './ai/OpenAIService';
 import '../css/SummaryPage.css';
@@ -7,6 +7,7 @@ import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 const SummaryPage = () => {
   const location = useLocation();
   const { messages, language } = location.state || { messages: [], language: 'English' };
+  const messagesRef = useRef(messages);
   const [summary, setSummary] = useState('');
   const [grammarScore, setGrammarScore] = useState(null);
   const [vocabularyScore, setVocabularyScore] = useState(null);
@@ -15,11 +16,15 @@ const SummaryPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("useEffect triggered");
+    console.log("Messages:", messagesRef.current);
+    console.log("Language:", language);
+
     let isMounted = true;
 
     const fetchSummaryAndScore = async () => {
       try {
-        const { summary, grammarScore, vocabularyScore, mistakes } = await summarizeChatWithOpenAI(messages, language);
+        const { summary, grammarScore, vocabularyScore, mistakes } = await summarizeChatWithOpenAI(messagesRef.current, language);
         if (isMounted) {
           setSummary(summary);
           setGrammarScore(grammarScore);
@@ -40,7 +45,7 @@ const SummaryPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [messages, language]);
+  }, [language]);
 
   return (
     <>
