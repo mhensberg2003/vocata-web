@@ -12,6 +12,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
   const [showSummaryPrompt, setShowSummaryPrompt] = useState(false);
   const [showSummaryIcon, setShowSummaryIcon] = useState(false);
   const [canTranslate, setCanTranslate] = useState(false);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     // Enable translation if there's any untranslated AI message
@@ -122,6 +123,12 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
     }
   }, [messages, isThinking]);
 
+  useEffect(() => {
+    if (!isThinking && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isThinking]);
+
   return (
     <div className="Chat-container">
       <div className="language-chips">
@@ -151,6 +158,7 @@ function ChatWindow({ messages, setMessages, language, topic, isThinking, setIsT
 
       <div className="Input-container">
         <input
+          ref={inputRef}
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
