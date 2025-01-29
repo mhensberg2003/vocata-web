@@ -5,13 +5,18 @@ import { initializeFirestore } from './firebaseConfig';
 let db = null;
 
 export const saveChat = async (messages, language, topic) => {
-  if (!db) await initializeFirestore();
+  if (!db) {
+    db = getFirestore();  // Changed from await initializeFirestore()
+  }
   const auth = getAuth();
   const user = auth.currentUser;
   
   if (!user) {
+    console.error('No authenticated user found:', auth);
     throw new Error('User must be authenticated to save chats');
   }
+
+  console.log('Attempting to save chat for user:', user.uid, 'Auth method:', user.providerData[0].providerId);
 
   try {
     const userChatsRef = collection(db, 'users', user.uid, 'chats');
